@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Inputting an address</title>
+
+  <!-- Bootstrap -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <style type="text/css">
+    label {
+      display:none;
+    }
+    body {
+      padding-top:100px;
+    }
+  /*  h2 {
+      margin-bottom:2em;
+    }*/
+    h4 {
+      margin-top:2.5em;
+      margin-bottom: 1.3em;
+    }
+  </style>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    </head>
+    <body>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-6 col-xs-offset-3">
+
+            <h2>Inputting an address</h2>
+
+            <h4>Current typical input</h4>
+            <ul>
+              <li><a href="current-typical-input.html">Current typical input</a></li>
+            </ul>
+
+            <h4>Free text input</h4>
+            <ul>
+              <li><a href="free-text-input.html">Free text input</a></li>
+              <li><a href="free-text-input-thanks.html">Free text input - Thanks!</a></li>
+              <li><a href="free-text-input-sorry.html">Free text input - Sorry</a></li>
+              <li><a href="free-text-input-sorry-v2.html">Free text input - Sorry - V2</a></li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+      <script>
+
+        var placeholder = 'Example: \n42 High Road \nTottenham \nLondon \nN17 2AG';
+        $('textarea').html(placeholder);
+
+        $('textarea').focus(function(){
+          if($(this).html() === placeholder){
+            $(this).html('');
+            $(this).attr( 'value', '');
+          }
+        });
+
+        $('textarea').blur(function(){
+          console.log($(this).html());
+          if($(this).html() == ''){
+            $(this).html(placeholder);
+            $(this).attr( 'value', placeholder);
+          }    
+        });
+
+      </script>
+    </body>
+    </html>
