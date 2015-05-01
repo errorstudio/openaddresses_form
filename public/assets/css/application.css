@@ -55,9 +55,31 @@ address {
 }
 
 
+.parsley-errors-list {
+	list-style: none;
+	padding:0;
+	color:#aa0000;
+	margin-top:5px;
+}
+
+.parsley-error {
+	background-color: #FFECEC;
+}
+
 .box {
 	width:100%;
 	max-width:500px;
 	margin:0 auto;
 	padding:15px;
+}
+
+.index-link {
+	position:fixed;
+	opacity:.2;
+	right:15px;
+	bottom:15px;
+}
+
+.form-error textarea {
+	background:#FFECEC;
 }

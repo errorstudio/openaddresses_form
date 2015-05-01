@@ -5,29 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Inputting an address</title>
+  <title>Inputting an address: Test form 2 - Single field - Error</title>
 
   <!-- Bootstrap -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <style type="text/css">
-    label {
-      display:none;
-    }
-    body {
-      padding-top:100px;
-
-    }
-    @media screen and (max-width:993px) {
-      body {
-        padding-top:30px;
-      }
-    }
-    h4 {
-      margin-top:2.5em;
-      margin-bottom: 1.3em;
-    }
-  </style>
+  <link href="assets/css/application.css" rel="stylesheet">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,37 +20,44 @@
       <![endif]-->
     </head>
     <body>
+    <a class="index-link" href="index.html">Index</a>
 
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3">
+      <div class="box">
 
-            <h2>Inputting an address</h2>
+        <h2>Enter Address</h2>
 
-            <h4>Test form 1 - Multiple field</h4>
+        <form action="single-field-result-thanks.html" method="post" class="form-error">
 
-            <ul>
-              <li><a href="multiple-field.html">Multiple field</a></li>
+          <h4>Type the address how you would normally write it on an envelope.</h4>
+
+          <div class="form-group">
+            <textarea class="form-control input-lg" rows="7" placeholder=""></textarea>
+            <ul class="parsley-errors-list filled" >
+              <li class="parsley-required">A postcode is required.</li>
             </ul>
-
-            <h4>Test form 2 - Single field</h4>
-
-            <ul>
-              <li><a href="single-field-a.html">Single field - A</a></li>
-              <li><a href="single-field-b.html">Single field - B</a></li>
-            </ul>
-
           </div>
-        </div>
+
+          <button type="submit" class="btn btn-default btn-lg btn-primary pull-right">Submit</button>
+
+          <!-- <p class="tip">
+            If you're convinced this address is right, then blah blah
+          </p> -->
+
+        </form>
+
       </div>
+
 
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+      <script src="assets/js/parsley.min.js"></script>
+      <script src="assets/js/uri.js"></script>
+
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
       <script>
 
-        var placeholder = 'Example: \n42 High Road \nTottenham \nLondon \nN17 2AG';
+/*        var placeholder = 'Example: \n42 High Road \nTottenham \nLondon \nN17 2AG';
         $('textarea').html(placeholder);
 
         $('textarea').focus(function(){
@@ -83,7 +73,12 @@
             $(this).html(placeholder);
             $(this).attr( 'value', placeholder);
           }    
-        });
+        });*/
+
+        var uri = new URI();
+        var address = uri.query(true).address;
+
+        $('textarea').html(address);
 
       </script>
     </body>
