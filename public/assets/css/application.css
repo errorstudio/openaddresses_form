@@ -77,9 +77,13 @@ address {
 	position:fixed;
 	opacity:.2;
 	right:15px;
-	bottom:15px;
+	top:15px;
 }
 
 .form-error textarea {
 	background:#FFECEC;
+}
+
+form {
+	padding-bottom:60px;
 }
