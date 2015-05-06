@@ -20,9 +20,9 @@
 <div class="oa-address-field">
 
 
-    <label for="address">Address</label>
-    <textarea class="form-control input-lg" name="address" id="address" rows="7" placeholder=""></textarea>
-    <input type="checkbox" name="contribute" value="true"/>Contribute my address to <a
+    <label for="address"></label>
+    <textarea required data-parsley-required class="form-control input-lg" name="address" id="address" placeholder=""></textarea>
+    <input type="checkbox" name="contribute" value="true" class="contribute-address"/>Contribute my address to <a
     href="http://www.openaddressesuk.org">Open Addresses</a>
     <button class="confirm-address btn btn-default btn-lg btn-primary pull-right">Confirm address</button>
 
@@ -34,7 +34,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="assets/js/parsley.min.js"></script>
 <script src="assets/js/openaddresses.js"></script>
-<script src="assets/js/form_submission.js"></script>
+<script src="assets/js/input_form.js"></script>
+<script>
+    // Set up the form
+    container = $('.oa-address-field');
+    form = new OA.InputForm(container, {placeHolder: "Some placeholder text"});
+</script>
 
 </body>
 </html>
