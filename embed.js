@@ -15,8 +15,9 @@ var OpenAddresses = {
         configure = function() {
             var iframe = document.createElement("iframe");
             iframe.src="//localhost:8000/embed.html";
-            iframe.width = '100%';
-            //iframe.height = options.height || '650';
+            iframe.width = '500px';
+            iframe.height = '290px';
+            iframe.scrolling = 'no';
             iframe.frameBorder = 0;
             iframe.seamless = 'seamless';
             document.getElementById("openaddresses-form").appendChild(iframe);
@@ -27,13 +28,14 @@ var OpenAddresses = {
         }
 
         OpenAddresses.config = config;
-        this.configure();
-        this.inject();
+        configure();
+        inject();
     }
 };
-OpenAddress.SortingOffice({
+OpenAddresses.SortingOffice({
 
-})
+});
+
 
 
 
