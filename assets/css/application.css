@@ -56,20 +56,16 @@ a {
   -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
   -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-  /* 
-  	$color:#ccc;
-  	$fade:0.5;
-  	$hovercolor:#333;
-  
-  	$gradcolor: transparentize($color, $fade);
-  
-  	background: linear-gradient(to bottom, transparent 0%, transparent 95%, $gradcolor 95%, $gradcolor 100%);
-  	background-size: 20px 1.29em;
-  	background-position: left 13px; */
   background: url(../images/lined-dashed.png) repeat-x;
   background-position: left -4px;
   position: relative;
   z-index: 10; }
+
+.is-error .input-holder textarea {
+  background-color: #FFF7F7; }
+
+.is-success .input-holder textarea {
+  background: none; }
 
 .example-address {
   margin-top: 12px;
@@ -104,6 +100,7 @@ a {
 
 .action-holder {
   width: 294px;
+  height: 63px;
   background: #DADADA;
   padding: 12px;
   border-radius: 0 0 4px 4px;
@@ -141,6 +138,13 @@ button:hover {
   color: #fff;
   background-color: #E2471E; }
 
+button.edit-address {
+  color: #fff;
+  background-color: #C7C7C7; }
+
+button.edit-address:hover {
+  background-color: #B3B3B3; }
+
 ::-webkit-input-placeholder {
   color: #333; }
 
@@ -169,6 +173,37 @@ button:hover {
 
 .is-error .action-error {
   display: block; }
+
+.is-error .example-address {
+  display: none; }
+
+.error-message {
+  margin-top: 12px;
+  display: none;
+  color: #BE0B0B; }
+
+.is-error .error-message {
+  display: block; }
+
+.is-success .example-address {
+  display: none; }
+
+.success-message {
+  margin-top: 12px;
+  display: none;
+  color: #61bb5a; }
+
+.is-success .success-message {
+  display: block; }
+
+.tick {
+  background: url(../images/tick.svg) top left no-repeat;
+  display: block;
+  width: 34px;
+  height: 32px;
+  margin-top: 4px;
+  margin-left: 2px;
+  float: left; }
 
 .loader {
   display: block;

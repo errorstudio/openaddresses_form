@@ -86,6 +86,8 @@ OA.InputForm.prototype.handleSuccess = function(data) {
     $(".oa-address").removeClass("is-loading");
     $(".oa-address").removeClass("is-error");
     $(".oa-address").addClass("is-success");
+    $(".oa-address")
+    $(".input-holder textarea").attr('disabled',true);
 };
 
 // Handle unsuccessful submission to OA
