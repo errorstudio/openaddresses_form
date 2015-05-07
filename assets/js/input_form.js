@@ -6,6 +6,11 @@ OA.InputForm = function(element, configuration) {
     this.label = $(this.container.find('label')[0]);
     this.input = $(this.container.find('textarea')[0]);
     this.checkbox = $(this.container.find('input[type=checkbox]')[0]);
+    this.buttons = {
+        collecting: $('.action-collecting button'),
+        error: $('.action-error button'),
+        success: $('.action-success button')
+    };
 
     /*
     Presets. Can be overidden with a call to .configure()
@@ -18,12 +23,12 @@ OA.InputForm = function(element, configuration) {
         "success",
         "loading",
         "error"
-    ]
+    ];
 
     //configure the form; .configure() can be called later as well / instead.
     if (typeof(configuration) !== 'undefined') {
         this.configure(configuration);
-    };
+    }
     this.init();
 
 
@@ -39,11 +44,19 @@ OA.InputForm.prototype.configure = function(config) {
 
 // initialize the form
 OA.InputForm.prototype.init = function() {
+    var _this = this;
     this.label.html(this.labelText);
     this.input.attr('placeholder', this.placeHolder);
-    $('.action-collecting button').on('click', $.proxy(this.submitForm,this));
-    $('.action-success button').on('click', $.proxy(this.setStatus('collecting',this)));
-    $('.action-error button').on('click', $.proxy(this.setStatus('collecting'),this));
+    this.buttons.collecting.click(function(event) {
+        _this.submitForm();
+    });
+    this.buttons.error.click(function(event) {
+        _this.setStatus('collecting');
+    });
+    this.buttons.success.click(function(event) {
+        _this.setStatus('collecting');
+    });
+    this.input.focus();
 };
 
 
@@ -81,8 +94,6 @@ OA.InputForm.prototype.submitForm = function() {
     };
 };
 
-
-
 // Handle successful submission to OA
 OA.InputForm.prototype.onLoading = function() {
     console.log("loading");
@@ -102,11 +113,15 @@ OA.InputForm.prototype.handleError = function(message) {
 };
 
 OA.InputForm.prototype.setStatus = function(status) {
-    console.log('setting status to ' + status);
     var className = 'is-'+status;
     var _container = this.container;
     $(this.formStatuses).each(function(i,val) {
         _container.removeClass("is-"+val);
     });
     this.container.addClass(className);
-}
+    if (status == 'collecting') {
+        this.input.focus();
+    }
+};
+
+
