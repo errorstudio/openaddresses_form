@@ -6,7 +6,6 @@ OA.InputForm = function(element, configuration) {
     this.label = $(this.container.find('label')[0]);
     this.input = $(this.container.find('textarea')[0]);
     this.checkbox = $(this.container.find('input[type=checkbox]')[0]);
-    this.button = $(this.container.find('button.confirm-address')[0]);
 
     /*
     Presets. Can be overidden with a call to .configure()
@@ -14,18 +13,19 @@ OA.InputForm = function(element, configuration) {
     this.labelText = "Address";
     this.placeholder = "Enter an address";
 
-    //configure the form; .configure() can be called later as well / instead.
-    if (typeof(configuration) !== 'undefined') {
-        this.configure(configuration);
-    };
-
-    this.init();
     this.formStatuses = [
         "collecting",
         "success",
         "loading",
         "error"
     ]
+
+    //configure the form; .configure() can be called later as well / instead.
+    if (typeof(configuration) !== 'undefined') {
+        this.configure(configuration);
+    };
+    this.init();
+
 
 };
 
@@ -41,13 +41,25 @@ OA.InputForm.prototype.configure = function(config) {
 OA.InputForm.prototype.init = function() {
     this.label.html(this.labelText);
     this.input.attr('placeholder', this.placeHolder);
-    this.button.on('click', $.proxy(this.submitForm,this));
-    this.setStatus('collecting');
+    $('.action-collecting button').on('click', $.proxy(this.submitForm,this));
+    $('.action-success button').on('click', $.proxy(this.setStatus('collecting',this)));
+    $('.action-error button').on('click', $.proxy(this.setStatus('collecting'),this));
+};
+
+
+
+OA.InputForm.prototype.isValid = function() {
+    if (this.input.val()) {
+        return true;
+    } else {
+        this.setStatus('error');
+        return false;
+    }
 };
 
 // Submit the form to OA
 OA.InputForm.prototype.submitForm = function() {
-    if (true) {
+    if (this.isValid()) {
         $.ajax({
             method: 'post',
             url: OA.url,
@@ -69,6 +81,8 @@ OA.InputForm.prototype.submitForm = function() {
     };
 };
 
+
+
 // Handle successful submission to OA
 OA.InputForm.prototype.onLoading = function() {
     console.log("loading");
@@ -88,6 +102,7 @@ OA.InputForm.prototype.handleError = function(message) {
 };
 
 OA.InputForm.prototype.setStatus = function(status) {
+    console.log('setting status to ' + status);
     var className = 'is-'+status;
     var _container = this.container;
     $(this.formStatuses).each(function(i,val) {
