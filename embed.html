@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Address</title>
-    <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/assets/css/application.css"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -17,28 +16,52 @@
     <![endif]-->
 </head>
 <body>
-<div class="oa-address-field">
 
+<div class="oa-address is-collecting">
 
-    <label for="address"></label>
-    <textarea required data-parsley-required class="form-control input-lg" name="address" id="address" placeholder=""></textarea>
-    <input type="checkbox" name="contribute" value="true" class="contribute-address"/>Contribute my address to <a
-    href="http://www.openaddressesuk.org">Open Addresses</a>
-    <button class="confirm-address btn btn-default btn-lg btn-primary pull-right">Confirm address</button>
+    <div class="input-holder">
+        <label for="address"></label>
+        <textarea class="form-control input-lg" name="address" id="address" placeholder="Type address here…"></textarea>
+        <div class="example-address">
+            <span>Example:</span>
+            12 Longview Road<br />
+            West Kirby<br />
+            Merseyside<br />
+            CH48 0RS
+        </div>
+    </div>
 
+    <div class="action-holder">
+        <div class="action-collecting">
+            <button class="confirm-address">Confirm address</button>
+        </div>
+        <div class="action-loading">
+            <span class="loader"></span>
+        </div>
+        <div class="action-success">
+            <span class="tick"></span>
+            <a class="red-edit">Edit address</a>
+        </div>
+        <div class="action-error">
+            There was an error
+        </div>
+    </div>
+
+    <div class="oa-contribute">
+        <input type="checkbox" name="contribute" value="true" class="contribute-address"/>Contribute this address to <a href="http://www.openaddressesuk.org">Open Addresses</a>
+    </div>
 
 </div>
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins and ajax submissions) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="assets/js/parsley.min.js"></script>
 <script src="assets/js/openaddresses.js"></script>
 <script src="assets/js/input_form.js"></script>
 <script>
     // Set up the form
-    container = $('.oa-address-field');
-    form = new OA.InputForm(container, {placeHolder: "Some placeholder text"});
+    container = $('.oa-address');
+    form = new OA.InputForm(container);
 </script>
 
 </body>

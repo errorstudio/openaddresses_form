@@ -46,7 +46,7 @@ OA.InputForm.prototype.init = function() {
 
 // Submit the form to OA
 OA.InputForm.prototype.submitForm = function() {
-    if (this.input.parsley().validate()) {
+    if (true) {
         $.ajax({
             method: 'post',
             url: OA.url,
@@ -55,6 +55,9 @@ OA.InputForm.prototype.submitForm = function() {
                 contribute: this.checkbox.prop('checked')
             },
             context: this,
+            beforeSend: function(xhr,obj) {
+                this.onLoading();
+            },
             success: function(data,status,xhr) {
                 this.handleSuccess(data);
             },
@@ -66,11 +69,31 @@ OA.InputForm.prototype.submitForm = function() {
 };
 
 // Handle successful submission to OA
+OA.InputForm.prototype.onLoading = function() {
+    console.log("loading");
+    $(".oa-address").removeClass("is-collecting");
+    $(".oa-address").removeClass("is-success");
+    $(".oa-address").removeClass("is-loading");
+    $(".oa-address").removeClass("is-error");
+    $(".oa-address").addClass("is-loading");
+};
+
+// Handle successful submission to OA
 OA.InputForm.prototype.handleSuccess = function(data) {
     console.log(data);
+    $(".oa-address").removeClass("is-collecting");
+    $(".oa-address").removeClass("is-success");
+    $(".oa-address").removeClass("is-loading");
+    $(".oa-address").removeClass("is-error");
+    $(".oa-address").addClass("is-success");
 };
 
 // Handle unsuccessful submission to OA
 OA.InputForm.prototype.handleError = function(message) {
     console.log("Error: "+ message);
+    $(".oa-address").removeClass("is-collecting");
+    $(".oa-address").removeClass("is-success");
+    $(".oa-address").removeClass("is-loading");
+    $(".oa-address").removeClass("is-error");
+    $(".oa-address").addClass("is-error");
 };
