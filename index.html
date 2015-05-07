@@ -17,15 +17,28 @@
     <![endif]-->
 </head>
 <body>
+
 <div class="oa-address-field">
 
+    <div class="input-holder">
+        <label for="address"></label>
+        <textarea required data-parsley-required class="form-control input-lg" name="address" id="address" placeholder="Type address here…"></textarea>
+        <div class="example-address">
+            <span>Example:</span>
+            12 Longview Road<br />
+            West Kirby<br />
+            Merseyside<br />
+            CH48 0RS
+        </div>
+    </div>
 
-    <label for="address"></label>
-    <textarea required data-parsley-required class="form-control input-lg" name="address" id="address" placeholder=""></textarea>
-    <input type="checkbox" name="contribute" value="true" class="contribute-address"/>Contribute my address to <a
-    href="http://www.openaddressesuk.org">Open Addresses</a>
-    <button class="confirm-address btn btn-default btn-lg btn-primary pull-right">Confirm address</button>
+    <div class="button-holder">
+        <button class="confirm-address btn btn-default btn-lg btn-primary">Confirm address</button>
+    </div>
 
+    <div class="oa-contribute">
+        <input type="checkbox" name="contribute" value="true" class="contribute-address"/>Contribute my address to <a href="http://www.openaddressesuk.org">Open Addresses</a>
+    </div>
 
 </div>
 
