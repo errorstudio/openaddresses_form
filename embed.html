@@ -17,43 +17,53 @@
 </head>
 <body>
 
-<div class="oa-address is-collecting">
+    <div class="oa-address is-collecting">
 
-    <div class="input-holder">
-        <label for="address"></label>
-        <textarea class="form-control input-lg" rows="6" name="address" id="address" placeholder="Type address here…"></textarea>
-        <div class="example-address">
-            <span>Example:</span>
-            12 Longview Road<br />
-            West Kirby<br />
-            Merseyside<br />
-            CH48 0RS
+
+        <div class="input-holder">
+            <label for="address"></label>
+            <textarea class="form-control input-lg" name="address" id="address" placeholder="Type address here…"></textarea>
+            <div class="example-address">
+                <span>Example:</span>
+                12 Longview Road<br />
+                West Kirby<br />
+                Merseyside<br />
+                CH48 0RS
+            </div>
+            <div class="error-message">
+                This address doesn't look quite right.
+            </div>
+            <div class="success-message">
+                That's great, thank you!
+            </div>
+
         </div>
+
+        <div class="action-holder">
+            <div class="action-collecting">
+                <button class="confirm-address">Confirm address</button>
+            </div>
+            <div class="action-loading">
+                <span class="loader"></span>
+            </div>
+            <div class="action-success">
+                <span class="tick"></span>
+                <button class="edit-address">Edit address</button>
+            </div>
+            <div class="action-error">
+
+                <button class="retry-address">Try again</button>
+            </div>
+        </div>
+
+        <div class="oa-contribute">
+            <input type="checkbox" name="contribute" value="true" class="contribute-address"/>Contribute this address to <a href="http://www.openaddressesuk.org">Open Addresses</a>
+        </div>
+
     </div>
 
-    <div class="action-holder">
-        <div class="action-collecting">
-            <button class="confirm-address">Confirm address</button>
-        </div>
-        <div class="action-loading">
-            <span class="loader"></span>
-        </div>
-        <div class="action-success">
-            <span class="tick"></span>
-            <a class="red-edit">Edit address</a>
-        </div>
-        <div class="action-error">
-            There was an error
-        </div>
-    </div>
 
-    <div class="oa-contribute">
-        <input type="checkbox" name="contribute" value="true" class="contribute-address"/>Contribute this address to <a href="http://www.openaddressesuk.org">Open Addresses</a>
-    </div>
-
-</div>
-
-
+<<<<<<< HEAD
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins and ajax submissions) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="assets/js/openaddresses.js"></script>
@@ -63,6 +73,17 @@
     container = $('.oa-address');
     form = new OA.InputForm(container);
 </script>
+=======
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins and ajax submissions) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="assets/js/openaddresses.js"></script>
+    <script src="assets/js/input_form.js"></script>
+    <script>
+        // Set up the form
+        container = $('.oa-address');
+        form = new OA.InputForm(container, {placeHolder: "Type address here…"});
+    </script>
+>>>>>>> f91e27537650701e42d1e911b7593c969d5feb37
 
 </body>
 </html>
