@@ -12,9 +12,7 @@ OA.InputForm = function(element, configuration) {
     Presets. Can be overidden with a call to .configure()
      */
     this.labelText = "Address";
-    this.placeholder = "Enter Address";
-    this.inputCols = null;
-    this.inputRows = 6;
+    this.placeholder = "Enter an address";
 
     //configure the form; .configure() can be called later as well / instead.
     if (typeof(configuration) !== 'undefined') {
@@ -22,6 +20,12 @@ OA.InputForm = function(element, configuration) {
     };
 
     this.init();
+    this.formStatuses = [
+        "collecting",
+        "success",
+        "loading",
+        "error"
+    ]
 
 };
 
@@ -30,18 +34,15 @@ OA.InputForm.prototype.configure = function(config) {
     if (typeof(config) !== 'undefined') {
         this.labelText = ((config.labelText == null) ? this.labelText : config.labelText);
         this.placeHolder = ((config.placeHolder == null) ? this.placeHolder : config.placeHolder);
-        this.inputCols = ((config.css == null) ? this.inputCols : config.inputCols );
-        this.inputRows = ((config.css == null) ? this.inputRows: config.inputRows);
     };
 };
 
 // initialize the form
 OA.InputForm.prototype.init = function() {
     this.label.html(this.labelText);
-    this.input.attr('cols', this.inputCols);
-    this.input.attr('rows', this.inputRows);
     this.input.attr('placeholder', this.placeHolder);
     this.button.on('click', $.proxy(this.submitForm,this));
+    this.setStatus('collecting');
 };
 
 // Submit the form to OA
@@ -71,31 +72,26 @@ OA.InputForm.prototype.submitForm = function() {
 // Handle successful submission to OA
 OA.InputForm.prototype.onLoading = function() {
     console.log("loading");
-    $(".oa-address").removeClass("is-collecting");
-    $(".oa-address").removeClass("is-success");
-    $(".oa-address").removeClass("is-loading");
-    $(".oa-address").removeClass("is-error");
-    $(".oa-address").addClass("is-loading");
+    this.setStatus('loading')
 };
 
 // Handle successful submission to OA
 OA.InputForm.prototype.handleSuccess = function(data) {
     console.log(data);
-    $(".oa-address").removeClass("is-collecting");
-    $(".oa-address").removeClass("is-success");
-    $(".oa-address").removeClass("is-loading");
-    $(".oa-address").removeClass("is-error");
-    $(".oa-address").addClass("is-success");
-    $(".oa-address")
-    $(".input-holder textarea").attr('disabled',true);
+    this.setStatus('success')
 };
 
 // Handle unsuccessful submission to OA
 OA.InputForm.prototype.handleError = function(message) {
     console.log("Error: "+ message);
-    $(".oa-address").removeClass("is-collecting");
-    $(".oa-address").removeClass("is-success");
-    $(".oa-address").removeClass("is-loading");
-    $(".oa-address").removeClass("is-error");
-    $(".oa-address").addClass("is-error");
+    this.setStatus('error');
 };
+
+OA.InputForm.prototype.setStatus = function(status) {
+    var className = 'is-'+status;
+    var _container = this.container;
+    $(this.formStatuses).each(function(i,val) {
+        _container.removeClass("is-"+val);
+    });
+    this.container.addClass(className);
+}

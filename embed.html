@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Address</title>
-    <!-- <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css"/> -->
     <link rel="stylesheet" href="/assets/css/application.css"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -20,9 +19,10 @@
 
     <div class="oa-address is-collecting">
 
+
         <div class="input-holder">
             <label for="address"></label>
-            <textarea class="form-control input-lg" name="address" id="address" placeholder="Type address here…"></textarea>
+            <textarea class="form-control input-lg" rows="6" name="address" id="address" placeholder="Type address here…"></textarea>
             <div class="example-address">
                 <span>Example:</span>
                 12 Longview Road<br />
@@ -36,6 +36,7 @@
             <div class="success-message">
                 That's great, thank you!
             </div>
+
         </div>
 
         <div class="action-holder">
@@ -62,15 +63,15 @@
     </div>
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins and ajax submissions) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="assets/js/openaddresses.js"></script>
-    <script src="assets/js/input_form.js"></script>
-    <script>
-        // Set up the form
-        container = $('.oa-address');
-        form = new OA.InputForm(container, {placeHolder: "Type address here…"});
-    </script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins and ajax submissions) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="assets/js/openaddresses.js"></script>
+<script src="assets/js/input_form.js"></script>
+<script>
+    // Set up the form
+    container = $('.oa-address');
+    form = new OA.InputForm(container);
+</script>
 
 </body>
 </html>
