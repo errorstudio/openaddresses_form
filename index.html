@@ -45,31 +45,22 @@
         </div>
     </div>
     <script type="text/javascript" async defer>
-        // set up your
-        SortingOfficeConfig = {
-            onError: function(message) {
-                console.log(message);
-            },
-            onSuccess: function(data) {
-                console.log(data);
-            },
-            onLoading: function(data) {
-                console.log(data);
-            }
-        };
-        (function() {
+        (function(config) {
             var oa = document.createElement('script');
+            var config = (typeof(config) === 'undefined' ? {} : config);
             oa.src = 'http://clients.errorstudio.co.uk/oa/embed.js';
             oa.type = 'text/javascript';
             oa.async = 'true';
             oa.onload = oa.onreadystatechange = function() {
                 var rs = this.readyState;
                 if (rs && rs != 'complete' && rs != 'loaded') return;
-                try { OpenAddresses.SortingOffice.embed(SortingOfficeConfig); } catch (e) {}
+                try { OpenAddresses.SortingOffice.embed(config); } catch (e) {}
             };
             var s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(oa, s);
-        })();
+        })({
+            //your configuration options go here
+        });
     </script>
 </body>
 </html>
