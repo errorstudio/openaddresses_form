@@ -128,7 +128,12 @@ OA.InputForm.prototype.setState = function(status) {
     });
     this.container.addClass(className);
     if (status == 'collecting') {
+        this.input.attr('disabled',false);
         this.input.focus();
+    }
+
+    if (status == 'loading' || status == 'error') {
+        this.input.attr('disabled',true);
     }
 };
 
