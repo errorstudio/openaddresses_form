@@ -12,6 +12,10 @@ body {
 	box-sizing:border-box;
 }
 
+body {
+	margin:0;
+}
+
 a {
 	color: #ff633a;
 }
@@ -19,9 +23,7 @@ a {
 .oa-address {
 	width:100%;
 	max-width:500px;
-	//margin:0 auto;
-	//margin-top:100px;
-	//padding:15px;
+	margin:0 auto;
 	font-size:18px;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color:#333;

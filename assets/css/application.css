@@ -9,12 +9,16 @@ body {
 * {
   box-sizing: border-box; }
 
+body {
+  margin: 0; }
+
 a {
   color: #ff633a; }
 
 .oa-address {
   width: 100%;
   max-width: 500px;
+  margin: 0 auto;
   font-size: 18px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333; }
