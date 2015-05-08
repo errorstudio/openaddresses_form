@@ -5,7 +5,6 @@ Configuration options:
  onLoading: function() {},  // called when loading begins
  onError: function(error) {}, // called when an error occurs
  onSuccess: function(data) {}, // called when OA returns data
- enforceSubmission: false, // require submission to OA before accepting submission of the parent's form
  embedInto: container // if specified, we embed into the container instead of the default.
 
 
@@ -16,7 +15,7 @@ Configuration options:
 if(!console.log) console.log = function(){};
 var OpenAddresses = {
     SortingOffice: {
-        embedUrl: "//localhost:8001/embed.html",
+        embedUrl: "http://clients.errorstudio.co.uk/oa/embed.html",
 
         // Configure the object
         configure: function(config) {
@@ -105,17 +104,7 @@ var OpenAddresses = {
     }
 };
 
-OpenAddresses.SortingOffice.embed({
-    onError: function(message) {
-        console.log("**** " + message);
-    },
-    onSuccess: function(data) {
-        console.log(data);
-    },
-    onLoading: function(data) {
-        console.log(data);
-    }
-});
+
 
 
 
