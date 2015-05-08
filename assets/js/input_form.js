@@ -12,12 +12,20 @@ OA.InputForm = function(element, configuration) {
         success: $('.action-success button')
     };
 
+    if (typeof(URI(window.location).query(true).parentLocation) !== 'undefined') {
+        this.parentLocation = URI(window.location).query(true).parentLocation;
+    } else {
+        // assume we're not in an iframe for some weird reason and set to ourself
+        this.parentLocation = window.location.origin;
+    };
+
     /*
     Presets. Can be overidden with a call to .configure()
      */
     this.labelText = "Address";
     this.placeholder = "Enter an address";
 
+    //Statuses for the form - this relates to what is shown; you can set these with setState()
     this.formStatuses = [
         "collecting",
         "success",
@@ -30,7 +38,6 @@ OA.InputForm = function(element, configuration) {
         this.configure(configuration);
     }
     this.init();
-
 
 };
 
@@ -51,68 +58,69 @@ OA.InputForm.prototype.init = function() {
         _this.submitForm();
     });
     this.buttons.error.click(function(event) {
-        _this.setStatus('collecting');
+        _this.setState('collecting');
     });
     this.buttons.success.click(function(event) {
-        _this.setStatus('collecting');
+        _this.setState('collecting');
     });
-    this.input.focus();
 };
 
 
-
-OA.InputForm.prototype.isValid = function() {
+//check the form is valid; set the error state if it's not
+OA.InputForm.prototype.validate = function() {
     if (this.input.val()) {
         return true;
     } else {
-        this.setStatus('error');
+        this.setState('error');
+        this.sendMessageToParent('error',"You need to enter an address");
         return false;
     }
 };
 
 // Submit the form to OA
 OA.InputForm.prototype.submitForm = function() {
-    if (this.isValid()) {
+    var data = {
+        address: this.input.val(),
+        contribute: this.checkbox.prop('checked')
+    };
+    if (this.validate()) {
         $.ajax({
             method: 'post',
             url: OA.url,
-            data: {
-                address: this.input.val(),
-                contribute: this.checkbox.prop('checked')
-            },
+            data: data,
             context: this,
             beforeSend: function(xhr,obj) {
-                this.onLoading();
+                this.onLoading(data);
             },
             success: function(data,status,xhr) {
-                this.handleSuccess(data);
+                this.onSuccess(data);
             },
             error: function(xhr,status,error) {
-                this.handleError(error);
+                this.onError(error);
             }
         })
-    };
+    }
 };
 
 // Handle successful submission to OA
-OA.InputForm.prototype.onLoading = function() {
-    console.log("loading");
-    this.setStatus('loading')
+OA.InputForm.prototype.onLoading = function(data) {
+    this.sendMessageToParent('loading', data);
+    this.setState('loading')
 };
 
 // Handle successful submission to OA
-OA.InputForm.prototype.handleSuccess = function(data) {
-    console.log(data);
-    this.setStatus('success')
+OA.InputForm.prototype.onSuccess = function(data) {
+    this.sendMessageToParent('success', data);
+    this.setState('success')
 };
 
 // Handle unsuccessful submission to OA
-OA.InputForm.prototype.handleError = function(message) {
-    console.log("Error: "+ message);
-    this.setStatus('error');
+OA.InputForm.prototype.onError = function(message) {
+    this.sendMessageToParent('error',message);
+    this.setState('error');
 };
 
-OA.InputForm.prototype.setStatus = function(status) {
+OA.InputForm.prototype.setState = function(status) {
     var className = 'is-'+status;
     var _container = this.container;
     $(this.formStatuses).each(function(i,val) {
@@ -122,6 +130,14 @@ OA.InputForm.prototype.setStatus = function(status) {
     if (status == 'collecting') {
         this.input.focus();
     }
+};
+
+OA.InputForm.prototype.sendMessageToParent = function(type,data) {
+    var content = {
+        type: type,
+        data: data
+    };
+    parent.postMessage(content,this.parentLocation);
 };
 
 
